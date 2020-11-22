@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import numpy as np
-import os
 
 headers = {
     'User-Agent':
@@ -10,13 +9,12 @@ headers = {
 
 url = 'https://nine.websudoku.com/'
 grid = []
-path = os.getcwd() + '\\'
 
 
 def scrape():
 
-    with open(path + 'web.html', 'r', encoding="utf8") as f:
-        r = f.read()
+    r = requests.get(url, headers=headers)
+    r = r.content
     soup = bs(r, 'html.parser')
 
     table = soup.find('table', id='puzzle_grid')

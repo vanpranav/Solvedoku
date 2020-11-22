@@ -5,10 +5,12 @@ import numpy as np
 def check(x, y, val):
     global grid
 
+    # Check in particular row
     for i in range(0, 9):
         if grid[x][i] == val:
             return False
 
+    # Check in particular col
     for i in range(0, 9):
         if grid[i][y] == val:
             return False
@@ -16,6 +18,7 @@ def check(x, y, val):
     sx = (x // 3) * 3
     sy = (y // 3) * 3
 
+    # Check in particular square
     for i in range(0, 3):
         for j in range(0, 3):
             if grid[sx + 0][sy + 0] == val:
@@ -33,9 +36,9 @@ def solve():
                     if check(x, y, val):
                         grid[x][y] = val
                         solve()
-                        grid[x][y] = 0
+                        grid[x][y] = 0  # If solution failed
                 return
     print(np.matrix(grid))
     print()
-    input('Next Solution:')
+    input('Next Solution: ')
     print()
